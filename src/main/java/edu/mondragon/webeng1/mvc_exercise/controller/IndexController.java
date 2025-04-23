@@ -2,10 +2,14 @@ package edu.mondragon.webeng1.mvc_exercise.controller;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.model.SportResult;
+import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.service.SportResultSevice;
+import jakarta.inject.Inject;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,6 +30,9 @@ public class IndexController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    @Inject
+    private SportResultSevice sportResultSevice;
+
     public IndexController() {
         super();
     }
@@ -34,6 +41,10 @@ public class IndexController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         logger.debug("Index Controller");
+
+        ArrayList<SportResult> sportResults = sportResultSevice.loadSportResults();
+        request.setAttribute("sportResults", sportResults);
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/home.jsp");
         dispatcher.forward(request, response);
     }
