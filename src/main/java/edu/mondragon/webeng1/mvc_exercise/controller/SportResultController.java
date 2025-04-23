@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "UserController", urlPatterns = { "/user/*" })
+@WebServlet(name = "SportResultController", urlPatterns = { "/sportResult/*" })
 public class SportResultController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -38,7 +38,7 @@ public class SportResultController extends HttpServlet {
             // put("create", SportResultController.this::showUserForm);
             // put("edit", SportResultController.this::showUserForm);
             // put("view", SportResultController.this::showUser);
-            // put("list", SportResultController.this::listUsers);
+            put("list", SportResultController.this::listSportResults);
         }
     };
     private Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> postActionsMap = new HashMap<>() {

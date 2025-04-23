@@ -16,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * This class will show the main page (as home.jsp is not directly accessible).
@@ -43,7 +44,8 @@ public class IndexController extends HttpServlet {
         logger.debug("Index Controller");
 
         ArrayList<SportResult> sportResults = sportResultSevice.loadSportResults();
-        request.setAttribute("sportResults", sportResults);
+        HttpSession session = request.getSession();
+        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/home.jsp");
         dispatcher.forward(request, response);
