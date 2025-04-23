@@ -10,7 +10,7 @@ public class SportResult implements java.io.Serializable {
     private Integer team2Result;
 
     public SportResult() {
-        
+        sportResultId = 0;
     }
 
     public Integer getSportResultId() {

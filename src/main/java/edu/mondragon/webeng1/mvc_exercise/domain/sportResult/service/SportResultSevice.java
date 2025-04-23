@@ -12,7 +12,21 @@ public class SportResultSevice {
     @Inject
     private SportResultRepository repository;
 
+    public SportResult loadSportResult(int sportResultId) {
+        return repository.loadSportResult(sportResultId);
+    }
+
     public ArrayList<SportResult> loadSportResults() {
         return repository.loadSportResults();
+    }
+
+    public SportResult saveSportResult(SportResult sportResult) {
+        SportResult retSportResult = null;
+        if (sportResult.getSportResultId() == 0) {
+            retSportResult = repository.insertSportResult(sportResult);
+        } else {
+            // update
+        }
+        return retSportResult;
     }
 }
