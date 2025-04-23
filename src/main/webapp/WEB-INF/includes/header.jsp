@@ -14,6 +14,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/sport_result.css"/>
   <link rel="icon" href="/images/mu_light.svg" type="image/svg+xml"/>
   <fmt:bundle basename="edu.mondragon.webeng1.mvc_exercise.resources.Labels">
   <title>MVC Exercise 3 - <fmt:message key="${requestScope.pageTitle}"/></title>
@@ -72,6 +73,7 @@
       </div>
     </nav>
     </fmt:bundle>
+    <jsp:include page="/WEB-INF/view/sport_results/sport_results.jsp" />
     <fmt:bundle basename="edu.mondragon.webeng1.mvc_exercise.resources.Notifications">
     <div id="notifications">
       <c:if test="${not empty sessionScope.error}">
