@@ -7,5 +7,4 @@ tomcat.8080/
 /tomcat.8080/
 /.idea/
 tests/*
-*.pdf
 *_tmp.html
