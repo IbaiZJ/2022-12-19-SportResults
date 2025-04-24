@@ -41,7 +41,15 @@ public class Labels_eu extends ListResourceBundle{
         {"error.403.title", "Error 403 - Baimenik ez"},
         {"error.403.message","Akzio hau egiteko baimenik ez duzu edo baliobidera sarrerarik ez daukazu."},
         {"error.404.title", "Error 404 - Ez da Baliabidea aurkitu."},
-        {"error.404.message","Bila zabiltzen baliabidea ez da existitzen edo ezin izan da kargatu."}
+        {"error.404.message","Bila zabiltzen baliabidea ez da existitzen edo ezin izan da kargatu."},
+
+        {"create", "Sortu"},
+        {"1st_team's_name", "1º taldearen izena"},
+        {"1st_team's_result", "1º taldearen emaitza"},
+        {"2nd_team's_name", "2º taldearen izena"},
+        {"2nd_team's_result", "2º taldearen emaitza"},
+        {"createSportResult", "Sortu Kirol Emaitza"},
+        {"editSportResult", "Editatu Kirol Emaitza"},
     };
     
     @Override

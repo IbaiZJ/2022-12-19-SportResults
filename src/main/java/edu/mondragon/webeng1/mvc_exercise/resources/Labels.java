@@ -41,7 +41,15 @@ public class Labels extends ListResourceBundle{
         {"error.403.title", "Error 403 - Forbidden"},
         {"error.403.message","You are not allowed to perform this action or to access this resource."},
         {"error.404.title", "Error 404 - Not found."},
-        {"error.404.message","The resource cannot be loaded or does not exist."}
+        {"error.404.message","The resource cannot be loaded or does not exist."},
+
+        {"create", "Create"},
+        {"1st_team's_name", "1st team's name"},
+        {"1st_team's_result", "1st team's result"},
+        {"2nd_team's_name", "2nd team's name"},
+        {"2nd_team's_result", "2nd team's result"},
+        {"createSportResult", "Create Sport Result"},
+        {"editSportResult", "Edit Sport Result"},
     };
     
     @Override

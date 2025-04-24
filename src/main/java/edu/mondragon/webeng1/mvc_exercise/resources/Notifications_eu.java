@@ -31,7 +31,15 @@ public class Notifications_eu extends ListResourceBundle{
         {"error.403.not_own_user","Zure erabiltzailea bakarrik aldatu dezakezu."},
         {"error.403.not_session_user","Saioa hasi akzio hau egiteko."},
         {"error.403.user_not_author","Erabiltzailea baliabidearen autorea izan behar da hau aldatzeko."},
-        {"error.404.not_found","Baliabidea ez da existitzen edo ezin da kargatu."}
+        {"error.404.not_found","Baliabidea ez da existitzen edo ezin da kargatu."},
+
+        {"message.createSportResult", "Kirol emaitza sortu da"},
+        {"error.createSportResult", "Huts egin du kirol emaitza sortzean"},
+        {"message.editSportResult", "Kirol emaitza editatu da"},
+        {"error.editSportResult", "Huts egin du kirol emaitza editatzean"},
+        {"message.deleteSportResult", "Kirol emaitza ezabatu da"},
+        {"error.deleteSportResult", "Huts egin du kirol emaitza ezabatzean"}
+
     };
 
     @Override

@@ -41,7 +41,15 @@ public class Labels_es extends ListResourceBundle{
         {"error.403.title", "Error 403 - Prohibido"},
         {"error.403.message","No tienes permisos para hacer esta acción o para acceder a este recurso."},
         {"error.404.title", "Error 404 - Recurso no encontrado."},
-        {"error.404.message","El recurso no existe o no ha podido cargarse."}
+        {"error.404.message","El recurso no existe o no ha podido cargarse."},
+
+        {"create", "Crear"},
+        {"1st_team's_name", "Nombre del 1º grupo"},
+        {"1st_team's_result", "Resultado del 1º grupo"},
+        {"2nd_team's_name", "Nombre del 2º grupo"},
+        {"2nd_team's_result", "Resultado del 2º grupo"},
+        {"createSportResult", "Crear resultado deportivo"},
+        {"editSportResult", "Editar resultado deportivo"},
     };
     
     @Override
