@@ -32,7 +32,14 @@ public class Notifications extends ListResourceBundle {
         {"error.403.not_own_user","You can only modify your own user."},
         {"error.403.not_session_user","Login to perform this action."},
         {"error.403.user_not_author","User has to be the author of the resource to modify it."},
-        {"error.404.not_found","The resource does not exist or cannot be loaded."}
+        {"error.404.not_found","The resource does not exist or cannot be loaded."},
+
+        {"message.createSportResult", "Sport result created"},
+        {"error.createSportResult", "Sport result creation failed"},
+        {"message.editSportResult", "Sport result edited"},
+        {"error.editSportResult", "Sport result edition failed"},
+        {"message.deleteSportResult", "Sport result deleted"},
+        {"error.deleteSportResult", "Sport result deletion failed"},
     };
 
     @Override

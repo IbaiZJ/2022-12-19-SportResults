@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.model.SportResult;
 import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.service.SportResultSevice;
-import edu.mondragon.webeng1.mvc_exercise.domain.user.model.User;
 import edu.mondragon.webeng1.mvc_exercise.helper.ControllerHelper;
 import jakarta.inject.Inject;
 import jakarta.servlet.RequestDispatcher;
@@ -81,11 +80,12 @@ public class SportResultController extends HttpServlet {
         ArrayList<SportResult> sportResults = sportResultSevice.loadSportResults();
         request.setAttribute("sportResults", sportResults);
 
-        // RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/user/user_list.jsp");
+        // RequestDispatcher dispatcher =
+        // getServletContext().getRequestDispatcher("/WEB-INF/view/user/user_list.jsp");
         // try {
-        //     dispatcher.forward(request, response);
+        // dispatcher.forward(request, response);
         // } catch (ServletException | IOException e) {
-        //     logger.error("Error forwarding to user list.", e);
+        // logger.error("Error forwarding to user list.", e);
         // }
     }
 
@@ -105,7 +105,8 @@ public class SportResultController extends HttpServlet {
             request.setAttribute("sportResult", sportResult);
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/sport_results/sport_results_form.jsp");
+        RequestDispatcher dispatcher = getServletContext()
+                .getRequestDispatcher("/WEB-INF/view/sport_results/sport_results_form.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -115,7 +116,7 @@ public class SportResultController extends HttpServlet {
 
     private void createSportResult(HttpServletRequest request, HttpServletResponse response) {
         logger.info("Creating Sport Result");
-        
+
         HttpSession session = request.getSession(true);
         SportResult sportResult = new SportResult();
         sportResult.setTeam1Name(request.getParameter("team1Name"));
@@ -125,26 +126,16 @@ public class SportResultController extends HttpServlet {
 
         sportResultSevice.saveSportResult(sportResult);
 
-
-        User sessionUser = (User) session.getAttribute("user");
-        String redirectUrl = "/";
-        // if (sportResult.getSportResultId() != 0) {
-        //     request.setAttribute("user", user);
-        //     session.setAttribute("message", "message.createUser");
-        //     if (sessionUser != null) // If a user creates another user, redirect to the view
-        //         redirectUrl = "/user/" + user.getUserId();
-        //     // else, redirect to the index so they can login.
-        // } else {
-        //     session.setAttribute("error", "error.createUser");
-        //     if (sessionUser != null)
-        //         redirectUrl = "/user"; // If a user tried to creates another user, redirect to the list view.
-        //     // else, redirect to the index so they can login.
-        // }
+        if (sportResult.getSportResultId() != 0) {
+            session.setAttribute("message", "message.createSportResult");
+        } else {
+            session.setAttribute("error", "error.createSportResult");
+        }
 
         try {
-            response.sendRedirect(redirectUrl);
+            response.sendRedirect("/");
         } catch (IOException e) {
-            logger.error("Error redirecting to " + redirectUrl, e);
+            logger.error("Error redirecting to /", e);
         }
     }
 
@@ -160,26 +151,18 @@ public class SportResultController extends HttpServlet {
             ControllerErrorHelper.respondNotFound(request, response, this.getServletContext());
             return;
         }
-    
+
         sportResult.setTeam1Name(request.getParameter("team1Name"));
         sportResult.setTeam1Result(Integer.valueOf(request.getParameter("team1Result")));
         sportResult.setTeam2Name(request.getParameter("team2Name"));
         sportResult.setTeam2Result(Integer.valueOf(request.getParameter("team2Result")));
         sportResultSevice.saveSportResult(sportResult);
 
-        // if (user.getUserId() == 0) {
-        //     // Guard clause
-        //     session.setAttribute("error", "error.editUser");
-        //     try {
-        //         response.sendRedirect("/user/" + userId + "/edit");
-        //     } catch (IOException e) {
-        //         logger.error("Error redirecting to edit user form.", e);
-        //     }
-        //     return;
-        // }
-
-        // session.setAttribute("message", "message.editUser");
-        // session.setAttribute("user", user);
+        if (sportResult.getSportResultId() != 0) {
+            session.setAttribute("message", "message.editSportResult");
+        } else {
+            session.setAttribute("error", "error.editSportResult");
+        }
 
         try {
             response.sendRedirect("/");
@@ -194,10 +177,9 @@ public class SportResultController extends HttpServlet {
         int sportResultId = controllerHelper.getId();
 
         if (sportResultId != -1 && sportResultSevice.deleteSportResult(sportResultId)) {
-            // session.setAttribute("message", "message.deleteUser");
-            // session.removeAttribute("user");
+            session.setAttribute("message", "message.deleteSportResult");
         } else {
-            // session.setAttribute("error", "error.deleteUser");
+            session.setAttribute("error", "error.deleteSportResult");
         }
 
         try {
