@@ -36,7 +36,7 @@ public class SportResultController extends HttpServlet {
 
     private Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> getActionsMap = new HashMap<>() {
         {
-            // put("delete", SportResultController.this::deleteUser);
+            put("delete", SportResultController.this::deleteSportResult);
             put("create", SportResultController.this::showSportResultForm);
             put("edit", SportResultController.this::showSportResultForm);
             // put("view", SportResultController.this::showUser);
@@ -106,7 +106,6 @@ public class SportResultController extends HttpServlet {
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/sport_results/sport_results_form.jsp");
-
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
@@ -146,6 +145,24 @@ public class SportResultController extends HttpServlet {
             response.sendRedirect(redirectUrl);
         } catch (IOException e) {
             logger.error("Error redirecting to " + redirectUrl, e);
+        }
+    }
+
+    private void deleteSportResult(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(true);
+        int sportResultId = controllerHelper.getId();
+
+        if (sportResultId != -1 && sportResultSevice.deleteSportResult(sportResultId)) {
+            // session.setAttribute("message", "message.deleteUser");
+            // session.removeAttribute("user");
+        } else {
+            // session.setAttribute("error", "error.deleteUser");
+        }
+
+        try {
+            response.sendRedirect("/");
+        } catch (IOException e) {
+            logger.error("Error redirecting to root view.", e);
         }
     }
 }

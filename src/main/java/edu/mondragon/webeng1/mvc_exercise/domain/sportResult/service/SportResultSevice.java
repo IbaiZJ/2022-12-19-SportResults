@@ -29,4 +29,8 @@ public class SportResultSevice {
         }
         return retSportResult;
     }
+
+    public boolean deleteSportResult(int sportResultId) {
+        return repository.deleteSportResult(sportResultId);
+    }
 }

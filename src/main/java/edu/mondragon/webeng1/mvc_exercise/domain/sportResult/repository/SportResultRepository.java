@@ -9,5 +9,5 @@ public interface SportResultRepository {
     public SportResult loadSportResult(int sportResultId);
     public ArrayList<SportResult> loadSportResults();
     // public SportResult updateSportResult(SportResult sportResult);
-    // public boolean deleteSportResult(int sportResultId);
+    public boolean deleteSportResult(int sportResultId);
 }

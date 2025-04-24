@@ -113,4 +113,25 @@ public class SportResultRepositorySQL implements SportResultRepository {
         sqlConfig.disconnect(connection, stm);
         return sportResultList;
     }
+
+    @Override
+    public boolean deleteSportResult(int sportResultId) {
+        boolean ret = false;
+        String sqlDelete = "DELETE FROM sport_result WHERE sportResultId=?";
+        Connection connection = sqlConfig.connect();
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sqlDelete);
+            stm.setInt(1, sportResultId);
+            if (stm.executeUpdate() > 0) {
+                ret = true;
+            } else {
+                logger.error("Could not delete sport_result " + sportResultId);
+            }
+        } catch (SQLException e) {
+            logger.error("Error deleteSportResult " + sportResultId);
+        }
+
+        return ret;
+    }
 }
