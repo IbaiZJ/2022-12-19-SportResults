@@ -46,7 +46,7 @@ public class SportResultController extends HttpServlet {
     private Map<String, BiConsumer<HttpServletRequest, HttpServletResponse>> postActionsMap = new HashMap<>() {
         {
             put("create", SportResultController.this::createSportResult);
-            // put("edit", SportResultController.this::editUser);
+            put("edit", SportResultController.this::editSportResult);
         }
     };
 
@@ -146,6 +146,47 @@ public class SportResultController extends HttpServlet {
         } catch (IOException e) {
             logger.error("Error redirecting to " + redirectUrl, e);
         }
+    }
+
+    private void editSportResult(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(true);
+        int sportResultId = controllerHelper.getId();
+        SportResult sportResult = sportResultSevice.loadSportResult(sportResultId);
+        logger.debug("Show sportResult Form: " + sportResultId);
+
+        if (sportResult == null) {
+            // Guard clause
+            logger.error("SportResult cannot be edited.");
+            ControllerErrorHelper.respondNotFound(request, response, this.getServletContext());
+            return;
+        }
+    
+        sportResult.setTeam1Name(request.getParameter("team1Name"));
+        sportResult.setTeam1Result(Integer.valueOf(request.getParameter("team1Result")));
+        sportResult.setTeam2Name(request.getParameter("team2Name"));
+        sportResult.setTeam2Result(Integer.valueOf(request.getParameter("team2Result")));
+        sportResultSevice.saveSportResult(sportResult);
+
+        // if (user.getUserId() == 0) {
+        //     // Guard clause
+        //     session.setAttribute("error", "error.editUser");
+        //     try {
+        //         response.sendRedirect("/user/" + userId + "/edit");
+        //     } catch (IOException e) {
+        //         logger.error("Error redirecting to edit user form.", e);
+        //     }
+        //     return;
+        // }
+
+        // session.setAttribute("message", "message.editUser");
+        // session.setAttribute("user", user);
+
+        try {
+            response.sendRedirect("/");
+        } catch (IOException e) {
+            logger.error("Error redirecting to user view.", e);
+        }
+
     }
 
     private void deleteSportResult(HttpServletRequest request, HttpServletResponse response) {

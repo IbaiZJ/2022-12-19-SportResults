@@ -8,6 +8,6 @@ public interface SportResultRepository {
     public SportResult insertSportResult(SportResult sportResult);
     public SportResult loadSportResult(int sportResultId);
     public ArrayList<SportResult> loadSportResults();
-    // public SportResult updateSportResult(SportResult sportResult);
+    public SportResult updateSportResult(SportResult sportResult);
     public boolean deleteSportResult(int sportResultId);
 }

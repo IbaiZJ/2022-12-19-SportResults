@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import edu.mondragon.webeng1.mvc_exercise.config.SQLConfig;
 import edu.mondragon.webeng1.mvc_exercise.domain.news.model.NewsItem;
 import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.model.SportResult;
+import edu.mondragon.webeng1.mvc_exercise.domain.user.model.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -108,10 +109,36 @@ public class SportResultRepositorySQL implements SportResultRepository {
                 sportResultList.add(sportResult);
             }
         } catch (SQLException e) {
-            logger.error("Error DaoUserMysql loadSportResult",e);
+            logger.error("Error DaoUserMysql loadSportResult", e);
         }
         sqlConfig.disconnect(connection, stm);
         return sportResultList;
+    }
+
+    @Override
+    public SportResult updateSportResult(SportResult sportResult) {
+        String sqlUpdate = "UPDATE sport_result SET team1Name=?, team1Result=?, team2Name=?, team2Result=?  WHERE sportResultId=?";
+        SportResult retSportResult = null;
+        Connection connection = sqlConfig.connect();
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sqlUpdate);
+            stm.setString(1, sportResult.getTeam1Name());
+            stm.setInt(2, sportResult.getTeam1Result());
+            stm.setString(3, sportResult.getTeam2Name());
+            stm.setInt(4, sportResult.getTeam2Result());
+            stm.setInt(5, sportResult.getSportResultId());
+            logger.debug(stm.toString());
+
+            if (stm.executeUpdate() < 1) {
+                sportResult.setSportResultId(0);
+            }
+            retSportResult = sportResult;
+        } catch (SQLException e) {
+            logger.error("Error updateUser " + sportResult.getSportResultId(), e);
+        }
+        sqlConfig.disconnect(connection, stm);
+        return retSportResult;
     }
 
     @Override

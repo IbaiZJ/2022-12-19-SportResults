@@ -21,11 +21,11 @@ public class SportResultSevice {
     }
 
     public SportResult saveSportResult(SportResult sportResult) {
-        SportResult retSportResult = null;
+        SportResult retSportResult;
         if (sportResult.getSportResultId() == 0) {
             retSportResult = repository.insertSportResult(sportResult);
         } else {
-            // update
+            retSportResult = repository.updateSportResult(sportResult);
         }
         return retSportResult;
     }
