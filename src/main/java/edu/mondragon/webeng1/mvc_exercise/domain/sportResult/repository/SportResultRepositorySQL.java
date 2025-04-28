@@ -12,9 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import edu.mondragon.webeng1.mvc_exercise.config.SQLConfig;
-import edu.mondragon.webeng1.mvc_exercise.domain.news.model.NewsItem;
 import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.model.SportResult;
-import edu.mondragon.webeng1.mvc_exercise.domain.user.model.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

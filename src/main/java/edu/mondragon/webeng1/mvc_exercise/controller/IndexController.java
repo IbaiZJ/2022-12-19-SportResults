@@ -2,12 +2,10 @@ package edu.mondragon.webeng1.mvc_exercise.controller;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
-import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.model.SportResult;
 import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.service.SportResultSevice;
 import jakarta.inject.Inject;
 import jakarta.servlet.RequestDispatcher;
@@ -43,9 +41,10 @@ public class IndexController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         logger.debug("Index Controller");
 
-        ArrayList<SportResult> sportResults = sportResultSevice.loadSportResults();
         HttpSession session = request.getSession();
-        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
+        if(session.getAttribute("sportResults") == null) {
+            session.setAttribute("sportResults", sportResultSevice.loadSportResults());
+        }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/home.jsp");
         dispatcher.forward(request, response);

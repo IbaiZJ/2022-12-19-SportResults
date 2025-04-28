@@ -126,6 +126,9 @@ public class SportResultController extends HttpServlet {
 
         sportResultSevice.saveSportResult(sportResult);
 
+        // aktualizatu sportResults
+        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
+
         if (sportResult.getSportResultId() != 0) {
             session.setAttribute("message", "message.createSportResult");
         } else {
@@ -158,6 +161,10 @@ public class SportResultController extends HttpServlet {
         sportResult.setTeam2Result(Integer.valueOf(request.getParameter("team2Result")));
         sportResultSevice.saveSportResult(sportResult);
 
+
+        // aktualizatu sportResults
+        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
+
         if (sportResult.getSportResultId() != 0) {
             session.setAttribute("message", "message.editSportResult");
         } else {
@@ -181,6 +188,9 @@ public class SportResultController extends HttpServlet {
         } else {
             session.setAttribute("error", "error.deleteSportResult");
         }
+
+        // aktualizatu sportResults
+        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
 
         try {
             response.sendRedirect("/");
