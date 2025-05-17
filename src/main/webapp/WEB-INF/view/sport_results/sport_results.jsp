@@ -7,7 +7,7 @@
     <c:if test="${not empty sessionScope.user}">
       <a class="action_button" href="/sportResult/create"><fmt:message key="create"/></a><!-- if permited -->
     </c:if>
-    <c:forEach items="${sessionScope.sportResults}" var="result">
+    <c:forEach items="${applicationScope.sportResults}" var="result">
       <span class="sport_result_group">
         <span class="sport_result">
           <img src="/images/${result.team1Name}.png" alt="${result.team1Name} logo" title="${result.team1Name}" class="team" /><!--src from the name -->

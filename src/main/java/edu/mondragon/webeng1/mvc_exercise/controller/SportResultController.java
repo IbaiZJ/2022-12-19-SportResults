@@ -15,6 +15,7 @@ import edu.mondragon.webeng1.mvc_exercise.domain.sportResult.service.SportResult
 import edu.mondragon.webeng1.mvc_exercise.helper.ControllerHelper;
 import jakarta.inject.Inject;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -38,7 +39,6 @@ public class SportResultController extends HttpServlet {
             put("delete", SportResultController.this::deleteSportResult);
             put("create", SportResultController.this::showSportResultForm);
             put("edit", SportResultController.this::showSportResultForm);
-            // put("view", SportResultController.this::showUser);
             put("list", SportResultController.this::listSportResults);
         }
     };
@@ -127,7 +127,8 @@ public class SportResultController extends HttpServlet {
         sportResultSevice.saveSportResult(sportResult);
 
         // aktualizatu sportResults
-        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
+        ServletContext context = request.getSession().getServletContext();
+        context.setAttribute("sportResults", sportResultSevice.loadSportResults());
 
         if (sportResult.getSportResultId() != 0) {
             session.setAttribute("message", "message.createSportResult");
@@ -161,9 +162,9 @@ public class SportResultController extends HttpServlet {
         sportResult.setTeam2Result(Integer.valueOf(request.getParameter("team2Result")));
         sportResultSevice.saveSportResult(sportResult);
 
-
         // aktualizatu sportResults
-        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
+        ServletContext context = request.getSession().getServletContext();
+        context.setAttribute("sportResults", sportResultSevice.loadSportResults());
 
         if (sportResult.getSportResultId() != 0) {
             session.setAttribute("message", "message.editSportResult");
@@ -190,7 +191,8 @@ public class SportResultController extends HttpServlet {
         }
 
         // aktualizatu sportResults
-        session.setAttribute("sportResults", sportResultSevice.loadSportResults());
+        ServletContext context = request.getSession().getServletContext();
+        context.setAttribute("sportResults", sportResultSevice.loadSportResults());
 
         try {
             response.sendRedirect("/");
